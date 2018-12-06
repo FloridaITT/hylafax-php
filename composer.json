@@ -1,0 +1,23 @@
+{
+    "name": "faxitapp/hylafax",
+    "description": "Client for Hylafax-java api",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Vitaly Kustov",
+            "email": "kustov.vitalik@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "FaxItApp\\": "lib/src"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-curl": "*",
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}
