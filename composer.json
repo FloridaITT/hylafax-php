@@ -1,5 +1,5 @@
 {
-    "name": "faxitapp/hylafax",
+    "name": "vitalik-kustov/hylafax-php",
     "description": "Client for Hylafax-java api",
     "type": "library",
     "license": "proprietary",
