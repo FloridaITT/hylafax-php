@@ -6,7 +6,7 @@
  * Time: 01:39
  */
 
-namespace FaxItApp\V1;
+namespace FaxItApp\V1\Request;
 
 /**
  * Class SendFaxRequestBuilder

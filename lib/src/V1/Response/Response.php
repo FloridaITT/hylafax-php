@@ -6,13 +6,13 @@
  * Time: 01:36
  */
 
-namespace FaxItApp\V1;
+namespace FaxItApp\V1\Response;
 
 /**
- * Interface Request
+ * Interface Response
  * @package FaxItApp\V1
  */
-interface Request
+interface Response
 {
-    public function toArray(): array;
+
 }

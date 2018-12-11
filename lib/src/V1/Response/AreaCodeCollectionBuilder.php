@@ -2,23 +2,23 @@
 /**
  * Created by IntelliJ IDEA.
  * User: vitaly
- * Date: 10/12/2018
- * Time: 17:12
+ * Date: 11/12/2018
+ * Time: 12:08
  */
 
 namespace FaxItApp\V1\Response;
 
 
-class CountryCollectionBuilder extends CollectionBuilder
+class AreaCodeCollectionBuilder extends CollectionBuilder
 {
     /**
-     * @var Country[]
+     * @var AreaCode[]
      */
     private $content;
 
-    public function build(): CountryCollection
+    public function build(): AreaCodeCollection
     {
-        return new CountryCollection(
+        return new AreaCodeCollection(
             $this->content,
             $this->pageable,
             $this->totalElements,
@@ -33,29 +33,28 @@ class CountryCollectionBuilder extends CollectionBuilder
         );
     }
 
-    public function fillFromArray(array $json): CountryCollectionBuilder
+    public function fillFromArray(array $json): AreaCodeCollectionBuilder
     {
         return $this
             ->setContent(
                 $json['content'] && \is_array($json['content'])
-                    ? array_map(function ($country) {
-                        return Country::builder()
-                            ->fillFromArray($country)
-                            ->build();
-                    }, $json['content'])
+                    ? array_map(function ($areaCode) {
+                    return AreaCode::builder()
+                        ->fillFromArray($areaCode)
+                        ->build();
+                }, $json['content'])
                     : []
             )
             ->fill($json);
     }
 
     /**
-     * @param Country[] $content
-     * @return CountryCollectionBuilder
+     * @param AreaCode[] $content
+     * @return AreaCodeCollectionBuilder
      */
-    public function setContent(array $content): CountryCollectionBuilder
+    public function setContent(array $content): AreaCodeCollectionBuilder
     {
         $this->content = $content;
         return $this;
     }
-
 }

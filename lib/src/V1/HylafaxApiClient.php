@@ -9,6 +9,9 @@
 namespace FaxItApp\V1;
 
 use FaxItApp\Exception\HylafaxException;
+use FaxItApp\V1\Request\CollectionRequest;
+use FaxItApp\V1\Request\SendFaxRequest;
+use FaxItApp\V1\Response\AreaCodeCollection;
 use FaxItApp\V1\Response\CountryCollection;
 use FaxItApp\V1\Response\Fax;
 use FaxItApp\V1\Response\FaxCollection;
@@ -36,10 +39,11 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
         ]);
     }
 
-    public function getCountries(): CountryCollection
+    public function getCountries(CollectionRequest $request): CountryCollection
     {
         try {
-            $response = $this->httpClient->get(sprintf('countries'));
+
+            $response = $this->httpClient->get(sprintf('countries?%s', QueryStringUtils::fromCollectionRequest($request)));
 
             $json = json_decode($response->getBody()->getContents(), true);
 
@@ -52,9 +56,27 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
         }
     }
 
-    public function getAreaCodes()
+    /**
+     * @param string $country
+     * @param CollectionRequest $request
+     * @return AreaCodeCollection
+     * @throws HylafaxException
+     */
+    public function getAreaCodes(string $country, CollectionRequest $request): AreaCodeCollection
     {
-        // TODO: Implement getAreaCodes() method.
+        try {
+
+            $response = $this->httpClient->get(sprintf('area-codes?country=%s&%s', $country, QueryStringUtils::fromCollectionRequest($request)));
+
+            $json = json_decode($response->getBody()->getContents(), true);
+
+            return AreaCodeCollection::builder()
+                ->fillFromArray($json)
+                ->build();
+
+        } catch (\Throwable $error) {
+            throw HylafaxException::failedToGetAreaCodeCollection($error);
+        }
     }
 
     /**
@@ -124,7 +146,7 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
         }
     }
 
-    public function getFaxes(): FaxCollection
+    public function getFaxes(CollectionRequest $request): FaxCollection
     {
         try {
             $response = $this->httpClient->get(sprintf('faxes'));

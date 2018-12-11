@@ -41,4 +41,9 @@ class HylafaxException extends \Exception
     {
         return new self('Failed to get country collection', $e->getCode(), $e);
     }
+
+    public static function failedToGetAreaCodeCollection(\Throwable $e): HylafaxException
+    {
+        return new self('Failed to get area code collection', $e->getCode(), $e);
+    }
 }

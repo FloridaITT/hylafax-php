@@ -6,13 +6,13 @@
  * Time: 01:36
  */
 
-namespace FaxItApp\V1;
+namespace FaxItApp\V1\Request;
 
 /**
  * Class SendFaxRequest
  * @package FaxItApp\V1
  */
-class SendFaxRequest implements Request
+class SendFaxRequest
 {
     /**
      * @var string
@@ -84,14 +84,5 @@ class SendFaxRequest implements Request
     public function getFiles(): array
     {
         return $this->files;
-    }
-
-    public function toArray(): array
-    {
-        $data = [
-            [
-                ''
-            ],
-        ];
     }
 }

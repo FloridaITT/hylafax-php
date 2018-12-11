@@ -33,7 +33,7 @@ class FaxCollectionBuilder extends CollectionBuilder
         );
     }
 
-    public function fillFromArray(array $json)
+    public function fillFromArray(array $json): FaxCollectionBuilder
     {
         return $this
             ->setContent(
@@ -44,38 +44,8 @@ class FaxCollectionBuilder extends CollectionBuilder
                     ->build();
             }, $json['content'])
                 : []
-        )
-        ->setNumber($json['number'])
-        ->setEmpty($json['empty'])
-        ->setFirst($json['first'])
-        ->setLast($json['last'])
-        ->setNumberOfElements($json['numberOfElements'])
-        ->setPageable(
-            Pageable::builder()
-                ->setOffset($json['pageable']['offset'])
-                ->setPaged($json['pageable']['paged'])
-                ->setPageNumber($json['pageable']['pageNumber'])
-                ->setPageSize($json['pageable']['pageSize'])
-                ->setSort(
-                    Sort::builder()
-                        ->setEmpty($json['pageable']['sort']['empty'])
-                        ->setSorted($json['pageable']['sort']['sorted'])
-                        ->setUnsorted($json['pageable']['sort']['unsorted'])
-                        ->build()
-                )
-                ->setUnpaged($json['pageable']['unpaged'])
-                ->build()
-        )
-        ->setSize($json['size'])
-        ->setTotalElements($json['totalElements'])
-        ->setTotalPages($json['totalPages'])
-        ->setSort(
-            Sort::builder()
-                ->setSorted($json['sort']['sorted'])
-                ->setUnsorted($json['sort']['unsorted'])
-                ->setEmpty($json['sort']['empty'])
-                ->build()
-        );
+            )
+            ->fill($json);
     }
 
     /**
