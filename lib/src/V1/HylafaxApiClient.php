@@ -105,7 +105,7 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
             foreach ($request->getFiles() as $file) {
                 $multiPart[] = [
                     'name' => 'files',
-                    'contents' => fopen($file, 'rb')
+                    'contents' => fopen($file, 'r')
                 ];
             }
             $response = $this->httpClient->post('faxes', [
