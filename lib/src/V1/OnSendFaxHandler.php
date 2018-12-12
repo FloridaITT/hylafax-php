@@ -16,9 +16,8 @@ class OnSendFaxHandler
 {
     public function handle(Request $request): Fax
     {
-        var_dump($request->request);
-        var_dump($request->files);
         return Fax::builder()
+            ->fillFromArray($request->request->all())
             ->build();
     }
 }

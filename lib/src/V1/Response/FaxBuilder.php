@@ -121,7 +121,7 @@ class FaxBuilder
                     ->setId($json['outputFax']['id'])
                     ->setPageCount($json['outputFax']['pageCount'])
                     ->setState($json['outputFax']['state'])
-                    ->setLastError($json['lastError'])
+                    ->setLastError($json['outputFax']['lastError'])
                     ->setChoppingThreshold($json['outputFax']['choppingThreshold'])
                     ->setDialsAttempted($json['outputFax']['dialsAttempted'])
                     ->setJobType($json['outputFax']['jobType'])
