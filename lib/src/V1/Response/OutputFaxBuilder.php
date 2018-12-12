@@ -22,7 +22,7 @@ class OutputFaxBuilder
     private $choppingThreshold;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $jobType;
 
@@ -125,7 +125,7 @@ class OutputFaxBuilder
      * @param string $jobType
      * @return OutputFaxBuilder
      */
-    public function setJobType(string $jobType): OutputFaxBuilder
+    public function setJobType(?string $jobType): OutputFaxBuilder
     {
         $this->jobType = $jobType;
         return $this;

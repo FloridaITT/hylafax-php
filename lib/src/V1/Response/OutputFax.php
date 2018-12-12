@@ -22,7 +22,7 @@ class OutputFax
     private $choppingThreshold;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $jobType;
 
@@ -103,7 +103,7 @@ class OutputFax
      * @param string $state
      * @param int $triesAttempted
      */
-    public function __construct(int $id, int $choppingThreshold, string $jobType, int $dialsAttempted, ?string $lastError, int $maxDials, int $maxTries, string $number, int $pageCount, int $pagesTransmitted, int $verticalResolution, \DateTime $sendTime, string $state, int $triesAttempted)
+    public function __construct(int $id, int $choppingThreshold, ?string $jobType, int $dialsAttempted, ?string $lastError, int $maxDials, int $maxTries, string $number, int $pageCount, int $pagesTransmitted, int $verticalResolution, \DateTime $sendTime, string $state, int $triesAttempted)
     {
         $this->id = $id;
         $this->choppingThreshold = $choppingThreshold;
@@ -138,9 +138,9 @@ class OutputFax
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getJobType(): string
+    public function getJobType(): ?string
     {
         return $this->jobType;
     }
