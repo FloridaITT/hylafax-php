@@ -67,7 +67,7 @@ class OutputFax
     private $verticalResolution;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $sendTime;
 
@@ -103,7 +103,7 @@ class OutputFax
      * @param string $state
      * @param int $triesAttempted
      */
-    public function __construct(int $id, int $choppingThreshold, ?string $jobType, int $dialsAttempted, ?string $lastError, int $maxDials, int $maxTries, string $number, int $pageCount, int $pagesTransmitted, int $verticalResolution, \DateTime $sendTime, string $state, int $triesAttempted)
+    public function __construct(int $id, int $choppingThreshold, ?string $jobType, int $dialsAttempted, ?string $lastError, int $maxDials, int $maxTries, string $number, int $pageCount, int $pagesTransmitted, int $verticalResolution, ?\DateTime $sendTime, string $state, int $triesAttempted)
     {
         $this->id = $id;
         $this->choppingThreshold = $choppingThreshold;
@@ -210,9 +210,9 @@ class OutputFax
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getSendTime(): \DateTime
+    public function getSendTime(): ?\DateTime
     {
         return $this->sendTime;
     }

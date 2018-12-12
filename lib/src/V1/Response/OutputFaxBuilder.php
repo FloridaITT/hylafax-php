@@ -67,7 +67,7 @@ class OutputFaxBuilder
     private $verticalResolution;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $sendTime;
 
@@ -212,10 +212,10 @@ class OutputFaxBuilder
     }
 
     /**
-     * @param \DateTime $sendTime
+     * @param \DateTime|null $sendTime
      * @return OutputFaxBuilder
      */
-    public function setSendTime(\DateTime $sendTime): OutputFaxBuilder
+    public function setSendTime(?\DateTime $sendTime): OutputFaxBuilder
     {
         $this->sendTime = $sendTime;
         return $this;
