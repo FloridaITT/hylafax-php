@@ -43,7 +43,9 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
     {
         try {
 
-            $response = $this->httpClient->get(sprintf('countries?%s', QueryStringUtils::fromCollectionRequest($request)));
+            $response = $this->httpClient->get(sprintf('countries?%s', QueryStringUtils::fromCollectionRequest($request)), [
+                RequestOptions::AUTH => $this->getAuth()
+            ]);
 
             $json = json_decode($response->getBody()->getContents(), true);
 
@@ -66,7 +68,9 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
     {
         try {
 
-            $response = $this->httpClient->get(sprintf('area-codes?country=%s&%s', $country, QueryStringUtils::fromCollectionRequest($request)));
+            $response = $this->httpClient->get(sprintf('area-codes?country=%s&%s', $country, QueryStringUtils::fromCollectionRequest($request)), [
+                RequestOptions::AUTH => $this->getAuth()
+            ]);
 
             $json = json_decode($response->getBody()->getContents(), true);
 
@@ -111,6 +115,7 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
             $response = $this->httpClient->post('faxes', [
                 // http://docs.guzzlephp.org/en/stable/quickstart.html#sending-form-files
                 RequestOptions::MULTIPART => $multiPart,
+                RequestOptions::AUTH => $this->getAuth()
             ]);
 
             $json = json_decode($response->getBody()->getContents(), true);
@@ -133,7 +138,9 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
     public function getFax(string $id): Fax
     {
         try {
-            $response = $this->httpClient->get(sprintf('faxes/%s', $id));
+            $response = $this->httpClient->get(sprintf('faxes/%s', $id), [
+                RequestOptions::AUTH => $this->getAuth()
+            ]);
 
             $json = json_decode($response->getBody()->getContents(), true);
 
@@ -149,7 +156,9 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
     public function getFaxes(CollectionRequest $request): FaxCollection
     {
         try {
-            $response = $this->httpClient->get(sprintf('faxes'));
+            $response = $this->httpClient->get(sprintf('faxes'), [
+                RequestOptions::AUTH => $this->getAuth()
+            ]);
 
             $json = json_decode($response->getBody()->getContents(), true);
 
@@ -170,7 +179,9 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
     public function cancelFax(string $id): Fax
     {
         try {
-            $response = $this->httpClient->post(sprintf('faxes/%s/cancel', $id));
+            $response = $this->httpClient->post(sprintf('faxes/%s/cancel', $id), [
+                RequestOptions::AUTH => $this->getAuth()
+            ]);
 
             $json = json_decode($response->getBody()->getContents(), true);
 
@@ -189,9 +200,16 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
     public function deleteFax(string $id): void
     {
         try {
-            $this->httpClient->delete(sprintf('faxes/%s', $id));
+            $this->httpClient->delete(sprintf('faxes/%s', $id), [
+                RequestOptions::AUTH => $this->getAuth()
+            ]);
         } catch (\Throwable $error) {
             throw HylafaxException::failedToDeleteFax($id, $error);
         }
+    }
+
+    private function getAuth(): array
+    {
+        return [$this->config->getUsername(), $this->config->getPassword()];
     }
 }
