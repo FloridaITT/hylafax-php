@@ -30,9 +30,15 @@ class SendFaxRequestBuilder
     private $cancelTimeout;
 
     /**
+     * @var FaxPayload
+     */
+    private $faxPayload;
+
+    /**
      * @var array
      */
     private $files = [];
+
 
     public function create(): SendFaxRequest
     {
@@ -40,7 +46,8 @@ class SendFaxRequestBuilder
             $this->to,
             $this->callbackUrl,
             $this->cancelTimeout,
-            $this->files
+            $this->files,
+            $this->faxPayload
         );
     }
 
@@ -51,6 +58,7 @@ class SendFaxRequestBuilder
     public function setTo(string $to): SendFaxRequestBuilder
     {
         $this->to = $to;
+
         return $this;
     }
 
@@ -61,6 +69,7 @@ class SendFaxRequestBuilder
     public function setCallbackUrl(string $callbackUrl): SendFaxRequestBuilder
     {
         $this->callbackUrl = $callbackUrl;
+
         return $this;
     }
 
@@ -71,6 +80,7 @@ class SendFaxRequestBuilder
     public function setCancelTimeout(int $cancelTimeout): SendFaxRequestBuilder
     {
         $this->cancelTimeout = $cancelTimeout;
+
         return $this;
     }
 
@@ -81,6 +91,18 @@ class SendFaxRequestBuilder
     public function addFile(string $filePath): SendFaxRequestBuilder
     {
         $this->files[] = $filePath;
+
+        return $this;
+    }
+
+    /**
+     * @param FaxPayload $faxPayload
+     * @return SendFaxRequestBuilder
+     */
+    public function setFaxPayload(FaxPayload $faxPayload): SendFaxRequestBuilder
+    {
+        $this->faxPayload = $faxPayload;
+
         return $this;
     }
 

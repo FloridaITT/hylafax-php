@@ -106,6 +106,17 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
                     'contents' => $request->getCancelTimeout()
                 ],
             ];
+
+            if ($request->getFaxPayload()) {
+                $multiPart[] = [
+                    'name' => 'payload',
+                    'contents' => json_encode([
+                        'source' => $request->getFaxPayload()->getSource(),
+                        'user' => $request->getFaxPayload()->getUser(),
+                    ]),
+                ];
+            }
+
             foreach ($request->getFiles() as $file) {
                 $multiPart[] = [
                     'name' => 'files',

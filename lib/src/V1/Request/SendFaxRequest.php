@@ -30,6 +30,11 @@ class SendFaxRequest
     private $cancelTimeout;
 
     /**
+     * @var FaxPayload
+     */
+    private $faxPayload;
+
+    /**
      * @var array
      */
     private $files;
@@ -46,12 +51,13 @@ class SendFaxRequest
      * @param int $cancelTimeout
      * @param array $files
      */
-    public function __construct(string $to, string $callbackUrl, int $cancelTimeout, array $files)
+    public function __construct(string $to, string $callbackUrl, int $cancelTimeout, array $files, FaxPayload $faxPayload)
     {
         $this->to = $to;
         $this->callbackUrl = $callbackUrl;
         $this->cancelTimeout = $cancelTimeout;
         $this->files = $files;
+        $this->faxPayload = $faxPayload;
     }
 
     /**
@@ -85,4 +91,14 @@ class SendFaxRequest
     {
         return $this->files;
     }
+
+    /**
+     * @return FaxPayload
+     */
+    public function getFaxPayload(): FaxPayload
+    {
+        return $this->faxPayload;
+    }
+
+
 }
