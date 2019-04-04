@@ -96,6 +96,17 @@ class SendFaxRequestBuilder
     }
 
     /**
+     * @param resource $resource
+     * @return SendFaxRequestBuilder
+     */
+    public function addFileResource($resource): SendFaxRequestBuilder
+    {
+        $this->files[] = $resource;
+
+        return $this;
+    }
+
+    /**
      * @param FaxPayload $faxPayload
      * @return SendFaxRequestBuilder
      */

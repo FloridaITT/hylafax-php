@@ -50,6 +50,7 @@ class SendFaxRequest
      * @param string $callbackUrl
      * @param int $cancelTimeout
      * @param array $files
+     * @param FaxPayload $faxPayload
      */
     public function __construct(string $to, string $callbackUrl, int $cancelTimeout, array $files, FaxPayload $faxPayload)
     {

@@ -118,10 +118,17 @@ class HylafaxApiClient implements \FaxItApp\HylafaxApiClient
             }
 
             foreach ($request->getFiles() as $file) {
-                $multiPart[] = [
-                    'name' => 'files',
-                    'contents' => fopen($file, 'r')
-                ];
+                if (is_resource($file)) {
+                    $multiPart[] = [
+                        'name' => 'files',
+                        'contents' => $file,
+                    ];
+                } elseif (is_string($file)) {
+                    $multiPart[] = [
+                        'name' => 'files',
+                        'contents' => fopen($file, 'r')
+                    ];
+                }
             }
             $response = $this->httpClient->post('faxes', [
                 // http://docs.guzzlephp.org/en/stable/quickstart.html#sending-form-files
